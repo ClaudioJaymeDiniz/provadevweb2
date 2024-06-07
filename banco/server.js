@@ -207,23 +207,22 @@ app.put('/jogos/modificar/:id', (req, res) => {
   });
 });
 // campeonato ------------------------------------------------------------------4-
-app.post('/campeoantos/criar', (req, res) => {
-  const { campeonato, jogo } = req.body;
+app.post('/campeonatos/criar', (req, res) => {
+  const { campeonato, jogoID } = req.body;
 
-  const sql = 'INSERT INTO campeonatos (campeonato, jogo) VALUES (?, ?)';
-  const values = [campeonato, jogo];
+  const sql = 'INSERT INTO campeonatos (campeonato, jogoID) VALUES (?, ?)';
+  const values = [campeonato, jogoID];
 
   connection.query(sql, values, (err, result) => {
     if (err) {
       console.error('Erro ao inserir campeonato:', err);
-      res.status(500).send('Erro ao salvar camponato');
+      res.status(500).send('Erro ao salvar campeonato');
       return;
     }
     console.log('Campeonato salvo com sucesso:', result.insertId);
-    res.status(200).send('Campeoato salvo com sucesso');
+    res.status(200).send('Campeonato salvo com sucesso');
   });
 });
-
 
 //listar campeonatos
 app.get('/campeonatos/listar', (req, res) => {
